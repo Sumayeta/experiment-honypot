@@ -1,25 +1,28 @@
 # Python
-__pycache__/
 *.pyc
 *.pyo
+__pycache__/
 *.pyd
-*.sqlite3
+*.pyo
+*.pyd
 
-# Virtual Environment
+# Virtual environment
 venv/
-ENV/
 env/
+ENV/
 
 # Django
+*.sqlite3
 *.log
 *.pot
 *.pyc
-*.pyo
-*.db
-*.sqlite3
-/staticfiles/
-/media/
-
-# IDEs
-.vscode/
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
 .idea/
+.vscode/
+
+# Env files with secrets
+.env
+*.env
