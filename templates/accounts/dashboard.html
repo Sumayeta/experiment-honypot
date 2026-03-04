@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Security Dashboard{% endblock %}
+
+{% block content %}
+<h2>🔐 Security Dashboard</h2>
+
+<!-- PIE CHART -->
+<canvas id="riskChart" width="400" height="400"></canvas>
+
+<hr>
+
+<!-- LINE CHART -->
+<canvas id="dailyChart" width="600" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="risk-data" type="application/json">
+  {{ risk_data|json_script:"risk-data" }}
+</script>
+
+<script>
+const risk = JSON.parse(document.getElementById('risk-data').textContent);
+
+const riskCtx = document.getElementById('riskChart');
+new Chart(riskCtx, {
+  type: 'pie',
+  data: {
+    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+    datasets: [{
+      data: [risk.low, risk.medium, risk.high],
+      backgroundColor: ['#4CAF50','#FFC107','#F44336']
+    }]
+  }
+});
+</script>
+{% endblock %}

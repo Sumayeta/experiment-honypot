@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Honeypot Detect Site {% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            margin: 0 0.5rem;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Honeypot Detect Site </h1>
+        <h2>Security Status</h2>
+
+        <hr>
+
+        <h3>Honeypot.is</h3>
+        <pre>{{ honeypot }}</pre>
+
+        <h3>HoneyDB</h3>
+        <p>HoneyDB: No actionable data</p>
+        <h3>AbuseIPDB</h3>
+
+        {% if abuseipdb.data %}
+        <p><strong>IP:</strong> {{ abuseipdb.data.ipAddress }}</p>
+        <p><strong>Risk Score:</strong> {{ abuseipdb.data.abuseConfidenceScore }}%</p>
+
+        {% if abuseipdb.data.abuseConfidenceScore >= 50 %}
+          <p style="color:red;">⚠️ High risk IP detected</p>
+           {% else %}
+          <p style="color:green;">✅ IP looks safe</p>
+       {% endif %}
+       {% else %}
+        <p>No data from AbuseIPDB</p>
+       {% endif %}
+        <pre>{{ chn }}</pre>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
