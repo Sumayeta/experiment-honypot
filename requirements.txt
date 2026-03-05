@@ -2,3 +2,5 @@ Django==6.0.3
 gunicorn
 requests
 python-dotenv
+Pillow
+PyJWT
